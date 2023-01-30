@@ -18,34 +18,31 @@ var videoOptions = {
   format: 'mp4',
   pixelFormat: 'yuv420p'
 }
-videoshow(images, videoOptions)
-  .audio('./Black Clover Ending ! Bgm ! Theme.mp3')
-  .save('video.mp4')
-  .on('start', function (command) {
-    console.log('ffmpeg process started:', command)
-  })
-  .on('error', function (err, stdout, stderr) {
-    console.error('Error:', err)
-    console.error('ffmpeg stderr:', stderr)
-  })
-  .on('end', function (output) {
-    console.error('Video created in:', output)
-  })
+// videoshow(images, videoOptions)
+//   .audio('./Black Clover Ending ! Bgm ! Theme.mp3')
+//   .save('video.mp4')
+//   .on('start', function (command) {
+//     console.log('ffmpeg process started:', command)
+//   })
+//   .on('error', function (err, stdout, stderr) {
+//     console.error('Error:', err)
+//     console.error('ffmpeg stderr:', stderr)
+//   })
+//   .on('end', function (output) {
+//     console.error('Video created in:', output)
+//   })
 
 let getData = async ()=>{
     let config={
         url:"https://api-generator.retool.com/yp4aBC/data",
     }
     let response = await axios("https://api-generator.retool.com/yp4aBC/data");
+    console.log(response.data);
+    fs.writeFileSync("./meesho/test.json",JSON.stringify(response.data));
 
 }
-
-
-
-
-
-
-  var downloadImgFromUrl = function (uri, filename, callback) {
+getData();
+var downloadImgFromUrl = function (uri, filename, callback) {
     request.head(uri, function (err, res, body) {
       console.log('content-type:', res.headers['content-type']);
       console.log('content-length:', res.headers['content-length']);
